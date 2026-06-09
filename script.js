@@ -23,6 +23,12 @@ const models = {
     shed: null   // Ready for your next asset
 };
 
+const forestParts = [];
+const droppedItems = [];
+const dummy = new THREE.Object3D(); // Used for calculating InstancedMesh matrix
+const treeCount = 100; // Adjust this for how dense you want the forest
+let treeHealthArray = new Array(treeCount).fill(state.treeMaxHealth);
+
 // --- THREE.JS SETUP ---
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87ceeb); // Sky blue
@@ -388,6 +394,67 @@ function buildInventoryUI() {
             woodToPlace--;
         }
         modalBackpack.appendChild(slot);
+    }
+}
+
+// --- MISSING GENERATION LOGIC ---
+function populateForest() {
+    if (forestParts.length === 0) return;
+    
+    // Reset the tree health array for the new day
+    treeHealthArray = new Array(treeCount).fill(state.treeMaxHealth);
+    
+    // Grab the instanced mesh (we assume index 0 based on your loader logic)
+    const instancedTrees = forestParts[0];
+    
+    for (let i = 0; i < treeCount; i++) {
+        // Randomize positions, keeping them within the 200x200 ground
+        dummy.position.set(
+            (Math.random() - 0.5) * 180, 
+            0, 
+            (Math.random() - 0.5) * 180
+        );
+        
+        // Keep trees out of the center where the store/terminals are
+        if (Math.abs(dummy.position.x) < 20 && Math.abs(dummy.position.z) < 20) {
+            dummy.position.x += 30; 
+        }
+        
+        dummy.rotation.y = Math.random() * Math.PI;
+        dummy.scale.set(1, 1, 1);
+        dummy.updateMatrix();
+        
+        instancedTrees.setMatrixAt(i, dummy.matrix);
+    }
+    instancedTrees.instanceMatrix.needsUpdate = true;
+}
+
+function spawnLogs(treeX, treeZ) {
+    if (!models.log) return;
+    
+    const logsToDrop = 3; // How much wood a tree yields
+    
+    for (let i = 0; i < logsToDrop; i++) {
+        const newLog = models.log.clone();
+        
+        // Scatter them slightly around the stump
+        newLog.position.set(
+            treeX + (Math.random() * 2 - 1), 
+            0.5, 
+            treeZ + (Math.random() * 2 - 1)
+        );
+        
+        // Create an invisible hitbox for the raycaster
+        const hitBoxGeo = new THREE.BoxGeometry(2, 2, 2);
+        const hitBoxMat = new THREE.MeshBasicMaterial({ visible: false });
+        const hitBox = new THREE.Mesh(hitBoxGeo, hitBoxMat);
+        
+        hitBox.position.copy(newLog.position);
+        hitBox.userData = { visual: newLog }; // Link to the 3D model so we can delete it later
+        
+        scene.add(newLog);
+        scene.add(hitBox);
+        droppedItems.push(hitBox);
     }
 }
 
