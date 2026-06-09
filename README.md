@@ -1,8 +1,11 @@
-# 🪓 Lumber Store Simulator
-v1.1
+# 🪓 Timber Harvest | Woodworker Simulator
+
+**Version:** v1.1
 
 **Developer:** Mx. Olly
+
 **Platform:** Web Browser (HTML5, JavaScript, Three.js)
+
 **Genre:** First-Person Simulation / Resource Management
 
 ---
