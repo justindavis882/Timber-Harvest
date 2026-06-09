@@ -84,7 +84,7 @@ loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
 
 loadingManager.onLoad = function() {
     // EVERYTHING is downloaded! Now we can safely build the world.
-    document.querySelector('#blocker h1').innerText = "LUMBER STORE SIMULATOR";
+    document.querySelector('#blocker h1').innerText = "Timber Harvest";
     document.querySelector('#blocker p').style.display = 'block';
     document.querySelector('#blocker p').innerText = "Click to Start";
     
@@ -106,7 +106,7 @@ gltfLoader.load('low_poly_tree.glb', function (gltf) {
 });
 
 // 2. Load Logs
-gltfLoader.load('logs.glb', function(gltf) {
+gltfLoader.load('objects/logs.glb', function(gltf) {
     gltf.scene.traverse(function(child) {
         if (child.isMesh) {
             models.log = child; 
@@ -129,10 +129,10 @@ gltfLoader.load('logs.glb', function(gltf) {
 });
 
 // 3. Load Planks (Placeholder for when you get the file!)
-// gltfLoader.load('plank.glb', function(gltf) { ... });
+// gltfLoader.load('objects/plank.glb', function(gltf) { ... });
 
 // 4. Load Saw (Placeholder for when you get the file!)
-// gltfLoader.load('saw.glb', function(gltf) { ... });
+// gltfLoader.load('objects/saw.glb', function(gltf) { ... });
 
 // --- BOUNDARY FENCES ---
 const wallGeo = new THREE.BoxGeometry(200, 20, 2);
