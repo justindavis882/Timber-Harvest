@@ -1,0 +1,35 @@
+body { margin: 0; overflow: hidden; font-family: 'Courier New', Courier, monospace; background: #000; }
+#blocker { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; z-index: 10; }
+#crosshair { position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; background: white; transform: translate(-50%, -50%); border-radius: 50%; z-index: 5; pointer-events: none; }
+
+/* HUD */
+#hud { position: absolute; top: 10px; left: 10px; color: #0f0; background: rgba(0,0,0,0.8); padding: 10px; border: 2px solid #0f0; z-index: 5; pointer-events: none; }
+
+/* Hotbar */
+#hotbar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; pointer-events: none; }
+.slot { position: relative; width: 70px; height: 70px; background: rgba(0,0,0,0.8); border: 3px solid #555; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; text-align: center; font-weight: bold; }
+.slot.active { border-color: #0f0; background: rgba(0, 50, 0, 0.8); }
+.slot-num { position: absolute; top: 4px; left: 6px; font-size: 10px; color: #aaa; }
+
+/* Modals */
+.modal { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 400px; background: #222; border: 4px solid #555; box-shadow: 10px 10px 0px #000; color: white; padding: 20px; z-index: 20; }
+.modal h2 { margin-top: 0; text-transform: uppercase; border-bottom: 2px solid #555; padding-bottom: 10px; }
+.modal button { display: block; width: 100%; padding: 10px; margin-top: 10px; background: #444; color: white; border: 2px solid #666; cursor: pointer; font-family: inherit; font-weight: bold; }
+.modal button:hover { background: #666; }
+.close-btn { background: #800 !important; border-color: #f00 !important; }
+
+/* End of Day Screen */
+#endOfDayScreen { display: none; position: absolute; width: 100%; height: 100%; background: black; color: #0f0; z-index: 30; flex-direction: column; align-items: center; justify-content: center; }
+#sleepBtn { display: none; position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); padding: 15px 30px; font-size: 20px; background: #0088ff; border: none; color: white; cursor: pointer; z-index: 5; }
+
+#hit-text { position: absolute; top: 55%; left: 50%; transform: translateX(-50%); color: red; font-size: 20px; font-weight: bold; pointer-events: none; opacity: 0; transition: opacity 0.2s; z-index: 6; }
+
+/* Inventory Grid System */
+.grid-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.inv-slot { width: 60px; height: 60px; background: rgba(0,0,0,0.8); border: 2px solid #555; display: flex; align-items: center; justify-content: center; }
+.item { width: 100%; height: 100%; background: #444; border: 2px solid #888; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; cursor: grab; user-select: none; }
+.item:active { cursor: grabbing; }
+.item.axe-item { background: #800080; border-color: #b366ff; } /* Purple for axe */
+.item.wood-item { background: #8B4513; border-color: #cd853f; } /* Brown for wood */
+
+.store-zone { width: 100%; padding: 20px 0; background: #004400; border: 2px dashed #0f0; text-align: center; font-weight: bold; color: #0f0; margin-top: 15px; }
