@@ -397,7 +397,7 @@ function buildInventoryUI() {
     }
 }
 
-// --- MISSING GENERATION LOGIC ---
+// --- GENERATION LOGIC ---
 function populateForest() {
     if (forestParts.length === 0) return;
     
@@ -419,8 +419,8 @@ function populateForest() {
         if (Math.abs(dummy.position.x) < 20 && Math.abs(dummy.position.z) < 20) {
             dummy.position.x += 30; 
         }
+        dummy.rotation.set(-Math.PI / 2, 0, Math.random() * Math.PI);
         
-        dummy.rotation.y = Math.random() * Math.PI;
         dummy.scale.set(1, 1, 1);
         dummy.updateMatrix();
         
