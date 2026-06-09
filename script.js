@@ -95,7 +95,7 @@ loadingManager.onLoad = function() {
 const gltfLoader = new THREE.GLTFLoader(loadingManager);
 
 // 1. Load Trees
-gltfLoader.load('low_poly_tree.glb', function (gltf) {
+gltfLoader.load('objects/low_poly_tree.glb', function (gltf) {
     gltf.scene.traverse(function(child) {
         if (child.isMesh) {
             const instancedPart = new THREE.InstancedMesh(child.geometry, child.material, treeCount);
