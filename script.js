@@ -404,11 +404,8 @@ function populateForest() {
     // Reset the tree health array for the new day
     treeHealthArray = new Array(treeCount).fill(state.treeMaxHealth);
     
-    // Grab the instanced mesh (we assume index 0 based on your loader logic)
-    const instancedTrees = forestParts[0];
-    
     for (let i = 0; i < treeCount; i++) {
-        // Randomize positions, keeping them within the 200x200 ground
+        // 1. Calculate the random position for this specific tree
         dummy.position.set(
             (Math.random() - 0.5) * 180, 
             0, 
@@ -419,14 +416,22 @@ function populateForest() {
         if (Math.abs(dummy.position.x) < 20 && Math.abs(dummy.position.z) < 20) {
             dummy.position.x += 30; 
         }
-        dummy.rotation.set(-Math.PI / 2, 0, Math.random() * Math.PI);
         
+        // Rotate 90 degrees to fix the sideways Blender/GLTF issue
+        dummy.rotation.set(-Math.PI / 2, 0, Math.random() * Math.PI);
         dummy.scale.set(1, 1, 1);
         dummy.updateMatrix();
         
-        instancedTrees.setMatrixAt(i, dummy.matrix);
+        // 2. Apply this exact matrix to ALL meshes that make up the tree
+        forestParts.forEach(part => {
+            part.setMatrixAt(i, dummy.matrix);
+        });
     }
-    instancedTrees.instanceMatrix.needsUpdate = true;
+    
+    // 3. Tell Three.js to update the GPU for all tree parts
+    forestParts.forEach(part => {
+        part.instanceMatrix.needsUpdate = true;
+    });
 }
 
 function spawnLogs(treeX, treeZ) {
