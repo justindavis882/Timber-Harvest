@@ -1,6 +1,6 @@
 # 🪓 Timber Harvest | Woodworker Simulator
 
-**Version:** v1.1
+**Version:** v1.1.2 - Restructuring locations
 
 **Developer:** Mx. Olly
 
