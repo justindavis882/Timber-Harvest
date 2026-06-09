@@ -12,7 +12,7 @@
 
 ## 🌲 About the Game
 
-**Lumber Store Simulator** is an immersive, first-person web game where you build and manage your own lumber empire from the ground up. Placed in a dynamic 3D environment, players must manage their time and resources wisely to turn an empty plot of land into a thriving business.
+**Timber Harvest** is an immersive, first-person web game where you build and manage your own lumber empire from the ground up. Placed in a dynamic 3D environment, players must manage their time and resources wisely to turn an empty plot of land into a thriving business.
 
 The game features a tactile, grid-based drag-and-drop inventory system, tool upgrades, and a seamless day/night economy loop. What begins as a simple loop of chopping trees and selling logs quickly evolves into a complex management game involving processing materials, base building, and customer simulation.
 
